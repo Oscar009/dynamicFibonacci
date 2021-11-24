@@ -13,6 +13,8 @@ long fibonacci(int);
 using namespace std;
 
 vector v(1);
+int c = 0;
+
 int main() {
 
 	int n;
@@ -27,21 +29,30 @@ int main() {
 		cout << "Try with number > 0" << endl;
 	}
 
-	cout << fibonacci(n);
+	v.add(0, 1);
+	v.add(1, 1);
 
-	v->printPile();
+	cout << fibonacci(n) << endl;
+
+	cout << "Accesos de Fibonacci: " << c << endl;
 
 	return 0;
 }
 
 long fibonacci(int n) {
+	c++;
 	if (n < 2) {
-		v.add(n, 1);
-		return 1;
-	} else {
-		//if (v->get(n - 1) != 0 && v->get(n - 2) != 0) return v->get(n - 1) && v->get(n - 2);
-		long value = fibonacci(n - 1) + fibonacci(n - 2);
-		v.add(n, value);
-		return value;
+
+		v.get(n-1);
+	}
+	else {
+
+		if (n <= v.currentSize() && v.get(n) < 0) {
+			long m = v.get(n - 1) + v.get(n - 2);
+			v.add(n, m);
+			return m;
+		}
+		else if (v.get(n - 1) > 0 && v.get(n - 2) > 0) return v.get(n - 1) + v.get(n - 2);
+		else return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 }

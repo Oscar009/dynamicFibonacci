@@ -20,11 +20,10 @@ void vector::add(int index, long f) {
 		for (int i = 0; i < currentCapacity(); i++) {
 			copy.add(i, get(i));
 		}
-		data = new long[currentCapacity() * 2];
 		c = currentCapacity() * 2;
 		s = 0;
-		for (int i = 0; i < currentCapacity()/2; i++) {
-			data[i] = 0;
+		data = new long[c];
+		for (int i = 0; i < c/2; i++) {
 			add(i, copy.get(i));
 		}
 	}
@@ -46,7 +45,7 @@ void vector::printPile() {
 	std::cout << "[ ";
 	for (int i = 0; i < c; i++) {
 		if (data[i] && i < s) std::cout << "  " << data[i];
-		else std::cout << "    ";
+		else std::cout << "  0  ";
 	}
 	std::cout << " ]\n";
 }
